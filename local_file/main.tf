@@ -20,8 +20,8 @@ resource "local_file" "school" {
 }
 
 resource "aws_instance" "ubuntu" {
-    ami = "ami-0a01a5636f3c4f21c"
-    instance_type = "t2.micro"
+    ami = var.amis[0]
+    instance_type = "${var.instance_types[0].type}"
 
     tags = {
         Name = "My Terraform EC2 Instance"
@@ -30,7 +30,7 @@ resource "aws_instance" "ubuntu" {
 }
 
 resource "aws_s3_bucket" "data_bucket" {
-    bucket = "gwen-stacy-11-sept-2021"
+    bucket = "${var.bucket_name}"
     acl = "private"
 
     tags = {
